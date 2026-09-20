@@ -101,6 +101,7 @@
                 <!-- Navegación SPA -->
                 <nav class="flex gap-2 md:gap-6 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
                     <button onclick="navigate('fundamentos')" id="nav-fundamentos" class="nav-link active whitespace-nowrap px-2 py-1 text-sm font-medium hover:text-emerald-400 transition-colors"><i class="fa-solid fa-book-medical mr-2"></i>Fundamentos</button>
+                    <button onclick="navigate('genomica')" id="nav-genomica" class="nav-link whitespace-nowrap px-2 py-1 text-sm font-medium hover:text-emerald-400 transition-colors"><i class="fa-solid fa-magnifying-glass-chart mr-2"></i>Genómica</button>
                     <button onclick="navigate('simulador')" id="nav-simulador" class="nav-link whitespace-nowrap px-2 py-1 text-sm font-medium hover:text-emerald-400 transition-colors"><i class="fa-solid fa-flask mr-2"></i>Laboratorio</button>
                     <button onclick="navigate('casos')" id="nav-casos" class="nav-link whitespace-nowrap px-2 py-1 text-sm font-medium hover:text-emerald-400 transition-colors"><i class="fa-solid fa-user-doctor mr-2"></i>Casos</button>
                     <button onclick="navigate('evaluacion')" id="nav-evaluacion" class="nav-link whitespace-nowrap px-2 py-1 text-sm font-medium hover:text-emerald-400 transition-colors"><i class="fa-solid fa-clipboard-check mr-2"></i>Evaluación</button>
@@ -167,14 +168,157 @@
             </div>
 
             <div class="mt-8 flex justify-end">
+                <button onclick="navigate('genomica')" class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-2 rounded-lg transition-colors">Siguiente: Genómica <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </div>
+
+        <!-- PÁGINA 1.5: CATÁLOGO GENÓMICO -->
+        <div id="page-genomica" class="page-section">
+            <div class="border-l-4 border-emerald-500 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-white">2. Catálogo Genómico: Vía de la Melanocortina e Inmunometabolismo</h2>
+                <p class="text-slate-400 text-sm mt-1">Revisión de los genes clave cuyas mutaciones desregulan la homeostasis energética, provocando obesidad monogénica o disfunción metabólica.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <!-- GEN: LEP -->
+                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden flex flex-col">
+                    <div class="bg-slate-900 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-emerald-400 italic">LEP</h3>
+                        <span class="text-xs font-mono bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-600">Locus: 7q32.1</span>
+                    </div>
+                    <div class="p-5 flex-grow text-sm space-y-4">
+                        <div>
+                            <strong class="text-white block mb-1">Nombre Completo:</strong> Gen de la Leptina.
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1">Función Molecular Fisiológica:</strong>
+                            Codifica para la leptina, una hormona adipocina secretada por los adipocitos en proporción a la masa grasa. Atraviesa la barrera hematoencefálica y se une a su receptor en el núcleo arcuato hipotalámico, señalizando al cerebro el estado de las reservas energéticas. Promueve la saciedad y aumenta el gasto energético. Además, es un factor permisivo crucial para el inicio de la pubertad y la maduración de las células T del sistema inmune.
+                        </div>
+                        <div class="bg-red-900/20 border border-red-900/50 p-3 rounded-lg text-red-200">
+                            <strong class="text-red-400 block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Fisiopatología de la Mutación (Pérdida de función):</strong>
+                            Las mutaciones bialélicas (homocigotas o heterocigotas compuestas) causan deficiencia congénita de leptina. El cerebro interpreta erróneamente un estado de inanición perpetua. Resulta en <strong>obesidad severa de inicio temprano</strong>, hiperfagia extrema, hipogonadismo hipogonadotrófico (ausencia de pubertad) y disfunción inmune con infecciones recurrentes.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GEN: LEPR -->
+                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden flex flex-col">
+                    <div class="bg-slate-900 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-emerald-400 italic">LEPR</h3>
+                        <span class="text-xs font-mono bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-600">Locus: 1p31.3</span>
+                    </div>
+                    <div class="p-5 flex-grow text-sm space-y-4">
+                        <div>
+                            <strong class="text-white block mb-1">Nombre Completo:</strong> Gen del Receptor de Leptina.
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1">Función Molecular Fisiológica:</strong>
+                            Codifica varias isoformas del receptor de leptina. La isoforma larga (OB-Rb) posee un dominio intracelular completo capaz de activar la vía de señalización JAK2/STAT3. Esta cascada transcripcional es la responsable de estimular la expresión del gen <i>POMC</i> e inhibir transcripcionalmente a <i>AGRP</i> y <i>NPY</i> en el hipotálamo.
+                        </div>
+                        <div class="bg-red-900/20 border border-red-900/50 p-3 rounded-lg text-red-200">
+                            <strong class="text-red-400 block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Fisiopatología de la Mutación:</strong>
+                            Causa un fenotipo clínico casi idéntico a la deficiencia de leptina (obesidad masiva, hiperfagia, disfunción endócrina), pero paradójicamente, los niveles séricos de leptina de estos pacientes se encuentran <strong>extremadamente elevados</strong>. Es una resistencia primaria a la leptina a nivel del receptor.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GEN: POMC -->
+                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden flex flex-col">
+                    <div class="bg-slate-900 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-emerald-400 italic">POMC</h3>
+                        <span class="text-xs font-mono bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-600">Locus: 2p23.3</span>
+                    </div>
+                    <div class="p-5 flex-grow text-sm space-y-4">
+                        <div>
+                            <strong class="text-white block mb-1">Nombre Completo:</strong> Gen de la Proopiomelanocortina.
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1">Función Molecular Fisiológica:</strong>
+                            Sintetiza un polipéptido precursor que, dependiendo del tejido, sufre un procesamiento postraduccional diferencial. En el hipotálamo genera la hormona estimulante de melanocitos alfa ($\alpha$-MSH) que induce saciedad. En la glándula pituitaria anterior, se escinde para formar la hormona adrenocorticotrópica (ACTH), vital para la esteroidogénesis suprarrenal.
+                        </div>
+                        <div class="bg-red-900/20 border border-red-900/50 p-3 rounded-lg text-red-200">
+                            <strong class="text-red-400 block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Fisiopatología de la Mutación (Mutación Nula):</strong>
+                            Genera una tríada clínica clásica: 1) Obesidad severa hiperfágica (falta de $\alpha$-MSH en MC4R); 2) <strong>Insuficiencia suprarrenal primaria</strong> con crisis hipoglucémicas neonatales (falta de ACTH en MC2R); 3) Alteraciones de pigmentación o pelo rojo (falta de estimulación en el receptor MC1R del melanocito).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GEN: MC4R -->
+                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden flex flex-col">
+                    <div class="bg-slate-900 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-emerald-400 italic">MC4R</h3>
+                        <span class="text-xs font-mono bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-600">Locus: 18q21.32</span>
+                    </div>
+                    <div class="p-5 flex-grow text-sm space-y-4">
+                        <div>
+                            <strong class="text-white block mb-1">Nombre Completo:</strong> Gen del Receptor 4 de Melanocortina.
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1">Función Molecular Fisiológica:</strong>
+                            Receptor acoplado a proteína G ($G_s$) expresado en el núcleo paraventricular (PVN). Al unirse a su ligando endógeno ($\alpha$-MSH), activa la adenilato ciclasa incrementando el AMPc intracelular. Constituye el <strong>punto de convergencia final</strong> de las vías hipotalámicas para suprimir el apetito y aumentar el tono simpático (gasto energético).
+                        </div>
+                        <div class="bg-red-900/20 border border-red-900/50 p-3 rounded-lg text-red-200">
+                            <strong class="text-red-400 block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Fisiopatología de la Mutación (Haploinsuficiencia):</strong>
+                            Es la <strong>causa monogénica más común de obesidad humana</strong> (herencia autosómica dominante). Los pacientes presentan hiperfagia marcada (comportamiento obsesivo por comida), hiperinsulinemia temprana y aceleración del crecimiento lineal (niños obesos de talla alta), pero sin deficiencias endócrinas sistémicas graves.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GEN: PCSK1 -->
+                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden flex flex-col">
+                    <div class="bg-slate-900 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-emerald-400 italic">PCSK1</h3>
+                        <span class="text-xs font-mono bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-600">Locus: 5q15</span>
+                    </div>
+                    <div class="p-5 flex-grow text-sm space-y-4">
+                        <div>
+                            <strong class="text-white block mb-1">Nombre Completo:</strong> Proproteína Convertasa Subtilisina/Kexina Tipo 1.
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1">Función Molecular Fisiológica:</strong>
+                            Enzima neuroendócrina (PC1/3) fundamental para el procesamiento postraduccional y la activación de múltiples prohormonas. Transforma la Proopiomelanocortina (POMC) en ACTH y $\alpha$-MSH, pero también escinde la proinsulina en insulina funcional, y madura los precursores de glucagón, incretinas y GnRH.
+                        </div>
+                        <div class="bg-red-900/20 border border-red-900/50 p-3 rounded-lg text-red-200">
+                            <strong class="text-red-400 block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Fisiopatología de la Mutación:</strong>
+                            Su falla afecta múltiples ejes endócrinos. Produce un síndrome complejo caracterizado por obesidad (por deficiencia secundaria de $\alpha$-MSH), alteraciones en la glucemia (falla en el procesamiento de proinsulina), diabetes insípida, y <strong>diarrea malabsortiva severa</strong> en la etapa neonatal que suele requerir nutrición parenteral.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GEN: ADIPOQ (Contexto Tisular Periférico) -->
+                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden flex flex-col">
+                    <div class="bg-slate-900 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-emerald-400 italic">ADIPOQ</h3>
+                        <span class="text-xs font-mono bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-600">Locus: 3q27.3</span>
+                    </div>
+                    <div class="p-5 flex-grow text-sm space-y-4">
+                        <div>
+                            <strong class="text-white block mb-1">Nombre Completo:</strong> Gen de la Adiponectina.
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1">Función Molecular Fisiológica:</strong>
+                            Secreción exclusiva del tejido adiposo blanco sano. Viaja por circulación y se une a sus receptores (AdipoR1/R2) en músculo e hígado activando la cinasa AMPK. Sensibiliza poderosamente los tejidos a la insulina, promueve la oxidación de ácidos grasos y ejerce un efecto protector endotelial y antiinflamatorio.
+                        </div>
+                        <div class="bg-red-900/20 border border-red-900/50 p-3 rounded-lg text-red-200">
+                            <strong class="text-red-400 block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Fisiopatología de la Disregulación Epigenética/Transcripcional:</strong>
+                            Más que por mutaciones puntuales, en el contexto de la hipertrofia de adipocitos viscerales, el exceso de citocinas proinflamatorias como el TNF-$\alpha$ <strong>suprimen fuertemente la transcripción del gen <i>ADIPOQ</i></strong>. La "hipoadiponectinemia" resultante es el eslabón patogénico fundamental que desencadena el Síndrome Metabólico y la resistencia periférica a la insulina.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-8 flex justify-between">
+                <button onclick="navigate('fundamentos')" class="text-slate-400 hover:text-white px-4 py-2 transition-colors"><i class="fa-solid fa-arrow-left mr-2"></i> Anterior</button>
                 <button onclick="navigate('simulador')" class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-2 rounded-lg transition-colors">Siguiente: Laboratorio <i class="fa-solid fa-arrow-right ml-2"></i></button>
             </div>
         </div>
 
-        <!-- PÁGINA 2: LABORATORIO VIRTUAL -->
+        <!-- PÁGINA 3: LABORATORIO VIRTUAL -->
         <div id="page-simulador" class="page-section">
             <div class="border-l-4 border-emerald-500 pl-4 mb-6">
-                <h2 class="text-2xl font-bold text-white">2. Laboratorio Inmunometabólico Interactivo</h2>
+                <h2 class="text-2xl font-bold text-white">3. Laboratorio Inmunometabólico Interactivo</h2>
                 <p class="text-slate-400 text-sm mt-1">Simulador de señalización intracelular: Modula los parámetros para observar el efecto de la hipoxia, citocinas M1 (TNF-$\alpha$) y FFA sobre el residuo $Ser^{307}$ de IRS-1.</p>
             </div>
 
@@ -239,15 +383,15 @@
             </div>
 
             <div class="mt-8 flex justify-between">
-                <button onclick="navigate('fundamentos')" class="text-slate-400 hover:text-white px-4 py-2 transition-colors"><i class="fa-solid fa-arrow-left mr-2"></i> Anterior</button>
+                <button onclick="navigate('genomica')" class="text-slate-400 hover:text-white px-4 py-2 transition-colors"><i class="fa-solid fa-arrow-left mr-2"></i> Anterior</button>
                 <button onclick="navigate('casos')" class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-2 rounded-lg transition-colors">Siguiente: Casos Clínicos <i class="fa-solid fa-arrow-right ml-2"></i></button>
             </div>
         </div>
 
-        <!-- PÁGINA 3: CASOS CLÍNICOS -->
+        <!-- PÁGINA 4: CASOS CLÍNICOS -->
         <div id="page-casos" class="page-section">
             <div class="border-l-4 border-emerald-500 pl-4 mb-6">
-                <h2 class="text-2xl font-bold text-white">3. Discusión de Casos: Genómica Clínica</h2>
+                <h2 class="text-2xl font-bold text-white">4. Discusión de Casos: Genómica Clínica</h2>
                 <p class="text-slate-400 text-sm mt-1">Interpretación de variantes y perfiles de expresión genética.</p>
             </div>
 
@@ -301,10 +445,10 @@
             </div>
         </div>
 
-        <!-- PÁGINA 4: AUTOEVALUACIÓN -->
+        <!-- PÁGINA 5: AUTOEVALUACIÓN -->
         <div id="page-evaluacion" class="page-section">
             <div class="border-l-4 border-emerald-500 pl-4 mb-6">
-                <h2 class="text-2xl font-bold text-white">4. Autoevaluación Formativa</h2>
+                <h2 class="text-2xl font-bold text-white">5. Autoevaluación Formativa</h2>
                 <p class="text-slate-400 text-sm mt-1">Completa este cuestionario para habilitar tu asistencia a la sesión presencial de discusión de artículos.</p>
             </div>
 
@@ -394,6 +538,62 @@
                     </fieldset>
                 </div>
 
+                <!-- Q7 -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <fieldset>
+                        <legend class="text-white font-semibold mb-3">7. Paciente pediátrico con obesidad masiva e hiperfagia severa. El perfil endócrino revela niveles séricos de leptina extremadamente elevados. ¿Cuál es la alteración molecular más probable?</legend>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q7" value="a" class="accent-emerald-500"> a) Deficiencia congénita del gen <i>LEP</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q7" value="b" class="accent-emerald-500"> b) Resistencia primaria por mutación en el gen <i>LEPR</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q7" value="c" class="accent-emerald-500"> c) Falla en la escisión de la proinsulina por PCSK1</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q7" value="d" class="accent-emerald-500"> d) Activación sostenida del receptor MC4R</label>
+                        </div>
+                        <div id="fb-q7" class="hidden mt-4 text-sm p-3 rounded"></div>
+                    </fieldset>
+                </div>
+
+                <!-- Q8 -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <fieldset>
+                        <legend class="text-white font-semibold mb-3">8. En el contexto de la hipertrofia de adipocitos viscerales, ¿qué efecto tiene el incremento persistente de citocinas proinflamatorias como el TNF-$\alpha$ sobre la adiponectina?</legend>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q8" value="a" class="accent-emerald-500"> a) Estimula su transcripción mediante la activación del factor NF-$\kappa$B.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q8" value="b" class="accent-emerald-500"> b) Produce un cambio de empalme alternativo (splicing) generando isoformas inactivas.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q8" value="c" class="accent-emerald-500"> c) Suprime fuertemente la transcripción del gen <i>ADIPOQ</i>, causando hipoadiponectinemia.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q8" value="d" class="accent-emerald-500"> d) Evita la unión de la adiponectina a los receptores AdipoR1/R2 por competencia alostérica.</label>
+                        </div>
+                        <div id="fb-q8" class="hidden mt-4 text-sm p-3 rounded"></div>
+                    </fieldset>
+                </div>
+
+                <!-- Q9 -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <fieldset>
+                        <legend class="text-white font-semibold mb-3">9. Durante un estado prolongado de ayuno o déficit calórico, ¿cuál es el papel neuroendócrino específico del Péptido Relacionado con Agutí (AgRP) en el Núcleo Paraventricular (PVN)?</legend>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q9" value="a" class="accent-emerald-500"> a) Actúa como un antagonista competitivo y agonista inverso de los receptores MC4R.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q9" value="b" class="accent-emerald-500"> b) Degrada enzimáticamente a la $\alpha$-MSH circulante.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q9" value="c" class="accent-emerald-500"> c) Estimula los receptores funcionales de leptina (OB-Rb) en la pituitaria.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q9" value="d" class="accent-emerald-500"> d) Induce la síntesis de POMC a través de la vía anorexigénica.</label>
+                        </div>
+                        <div id="fb-q9" class="hidden mt-4 text-sm p-3 rounded"></div>
+                    </fieldset>
+                </div>
+
+                <!-- Q10 -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <fieldset>
+                        <legend class="text-white font-semibold mb-3">10. Lactante que cursa con obesidad temprana, alteraciones en la regulación de la glucemia y que, durante su periodo neonatal, desarrolló un cuadro grave de diarrea malabsortiva. La patogénesis de este síndrome complejo apunta a la falla de la enzima que activa múltiples prohormonas. ¿Cuál es el gen afectado?</legend>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q10" value="a" class="accent-emerald-500"> a) <i>POMC</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q10" value="b" class="accent-emerald-500"> b) <i>LEP</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q10" value="c" class="accent-emerald-500"> c) <i>PCSK1</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q10" value="d" class="accent-emerald-500"> d) <i>MC4R</i></label>
+                        </div>
+                        <div id="fb-q10" class="hidden mt-4 text-sm p-3 rounded"></div>
+                    </fieldset>
+                </div>
+
                 <div class="flex justify-between items-center pt-4">
                     <button type="button" onclick="navigate('casos')" class="text-slate-400 hover:text-white px-4 py-2 transition-colors"><i class="fa-solid fa-arrow-left mr-2"></i> Anterior</button>
                     <button type="button" id="btnEvaluar" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-emerald-900/50 transition-all transform hover:scale-105">
@@ -404,10 +604,10 @@
             </form>
         </div>
 
-        <!-- PÁGINA 5: BIBLIOGRAFÍA -->
+        <!-- PÁGINA 6: BIBLIOGRAFÍA -->
         <div id="page-bibliografia" class="page-section">
             <div class="border-l-4 border-emerald-500 pl-4 mb-6">
-                <h2 class="text-2xl font-bold text-white">5. Referencias Bibliográficas Base</h2>
+                <h2 class="text-2xl font-bold text-white">6. Referencias Bibliográficas Base</h2>
                 <p class="text-slate-400 text-sm mt-1">Literatura médica y genómica que fundamenta los conceptos del laboratorio virtual.</p>
             </div>
 
@@ -625,11 +825,28 @@
                 q6: {
                     correct: 'b',
                     expl: 'Correcto. El bloqueo estérico por fosforilación en $Ser^{307}$ impide el reclutamiento de PI3K. Sin esta activación primaria, la proteína cinasa B (Akt/PKB) no se activa, impidiendo la traslocación de las vesículas que contienen GLUT4 hacia la membrana celular <span class="cita" onclick="navigate(\'bibliografia\')">[5]</span>.'
+                },
+                q7: {
+                    correct: 'b',
+                    expl: 'Correcto. Las mutaciones en <i>LEPR</i> causan una resistencia primaria a la leptina. El fenotipo clínico imita a la deficiencia de leptina, pero debido a que el adipocito continúa secretándola sin encontrar respuesta receptorial, los niveles séricos de la hormona se encuentran en compensación, paradójicamente elevados.'
+                },
+                q8: {
+                    correct: 'c',
+                    expl: 'Exacto. En un estado de inflamación crónica de bajo grado, el exceso de citocinas proinflamatorias como el TNF-$\\alpha$ suprime fuertemente la transcripción del gen <i>ADIPOQ</i>. Esta disminución drástica (hipoadiponectinemia) desregula la sensibilidad a la insulina y promueve el Síndrome Metabólico <span class="cita" onclick="navigate(\'bibliografia\')">[4]</span>.'
+                },
+                q9: {
+                    correct: 'a',
+                    expl: 'Excelente. El AgRP secretado por las neuronas orexigénicas viaja al Núcleo Paraventricular donde compite directamente y desplaza a la $\\alpha$-MSH de los receptores MC4R, además de funcionar como un agonista inverso activo, anulando las señales previas de saciedad e impulsando el consumo calórico <span class="cita" onclick="navigate(\'bibliografia\')">[1, 2]</span>.'
+                },
+                q10: {
+                    correct: 'c',
+                    expl: 'Correcto. La Proproteína Convertasa Subtilisina/Kexina Tipo 1 (PCSK1) madura múltiples precursores. Su disfunción desencadena obesidad (al no generar $\\alpha$-MSH a partir de POMC), fallas glucémicas (dificultad para procesar proinsulina) y episodios neonatales de diarrea malabsortiva severa que pueden requerir nutrición intravenosa temporal.'
                 }
             };
 
             document.getElementById('btnEvaluar').addEventListener('click', () => {
                 let score = 0;
+                let totalQuestions = Object.keys(answersMap).length;
 
                 Object.keys(answersMap).forEach(qKey => {
                     const selected = document.querySelector(`input[name="${qKey}"]:checked`);
@@ -654,7 +871,7 @@
                     MathJax.typesetPromise([fbDiv]);
                 });
 
-                if (score === 6) {
+                if (score === totalQuestions) {
                     alert("¡Excelente trabajo! Has demostrado un dominio absoluto de los conceptos genómicos e inmunometabólicos. Estás listo para el análisis del reporte de caso en la sesión de Aula Invertida.");
                 }
             });
