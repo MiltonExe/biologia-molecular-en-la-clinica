@@ -1,2 +1,4 @@
 # biologia-molecular-en-la-clinica
-Repositorio académico administrado por el Dr. en C. Milton Omar Guzmán Ornelas, destinado a alojar los laboratorios virtuales y recursos interactivos de Biología Molecular en la Clínica para estudiantes de Medicina de la Universidad de Guadalajara (UdeG - CUTonalá)
+Este repositorio institucional, dirigido y desarrollado por el Dr. en C. Milton Omar Guzmán Ornelas, constituye el entorno virtual de aprendizaje y simulación para la unidad de aprendizaje de Biología Molecular en la Clínica. Diseñado específicamente para los estudiantes de la licenciatura en Medicina adscritos al Centro Universitario de Tonalá (CUTonalá) de la Universidad de Guadalajara (UdeG).
+
+El objetivo central de este espacio digital es alojar y centralizar el acceso a plataformas interactivas, simuladores inmunometabólicos, herramientas de diagnóstico genómico y discusiones de casos clínicos que formarán parte del programa analítico a lo largo del semestre. A través de este ecosistema, se busca facilitar el trabajo autónomo, promover la integración clínico-básica y consolidar el conocimiento médico traslacional bajo el modelo pedagógico de aula invertida.
