@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio Virtual | Biología Molecular en la Clínica | UdeG CUTonalá</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b',
+                        },
+                        slate: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- MathJax for LaTeX Rendering -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-link.active {
+            color: #34d399; /* emerald-400 */
+            border-bottom: 2px solid #34d399;
+        }
+        .cita {
+            color: #34d399;
+            font-size: 0.8em;
+            vertical-align: super;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .cita:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-300 font-sans antialiased leading-relaxed selection:bg-emerald-500 selection:text-white">
+
+    <!-- Header Institucional -->
+    <header class="bg-slate-950 border-b border-emerald-900 sticky top-0 z-50 shadow-lg shadow-emerald-900/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4 gap-4">
+                <div class="flex items-center gap-4 w-full md:w-auto">
+                    <div class="bg-emerald-700 text-white p-3 rounded-lg shadow-inner shrink-0">
+                        <i class="fa-solid fa-dna text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg md:text-xl font-bold text-white tracking-tight">Biología Molecular en la Clínica</h1>
+                        <p class="text-xs text-emerald-400 font-semibold uppercase tracking-wider">UdeG CUTonalá • Medicina 5º Semestre</p>
+                        <p class="text-xs text-slate-400 mt-0.5"><i class="fa-solid fa-user-tie mr-1"></i>Dr. en C. Milton Omar Guzmán Ornelas</p>
+                    </div>
+                </div>
+                <!-- Navegación SPA -->
+                <nav class="flex gap-2 md:gap-6 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+                    <button onclick="navigate('fundamentos')" id="nav-fundamentos" class="nav-link active whitespace-nowrap px-2 py-1 text-sm font-medium hover:text-emerald-400 transition-colors"><i class="fa-solid fa-book-medical mr-2"></i>Fundamentos</button>
+                    <button onclick="navigate('simulador')" id="nav-simulador" class="nav-link whitespace-nowrap px-2 py-1 text-sm font-medium hover:text-emerald-400 transition-colors"><i class="fa-solid fa-flask mr-2"></i>Laboratorio</button>
+                    <button onclick="navigate('casos')" id="nav-casos" class="nav-link whitespace-nowrap px-2 py-1 text-sm font-medium hover:text-emerald-400 transition-colors"><i class="fa-solid fa-user-doctor mr-2"></i>Casos</button>
+                    <button onclick="navigate('evaluacion')" id="nav-evaluacion" class="nav-link whitespace-nowrap px-2 py-1 text-sm font-medium hover:text-emerald-400 transition-colors"><i class="fa-solid fa-clipboard-check mr-2"></i>Evaluación</button>
+                    <button onclick="navigate('bibliografia')" id="nav-bibliografia" class="nav-link whitespace-nowrap px-2 py-1 text-sm font-medium hover:text-emerald-400 transition-colors"><i class="fa-solid fa-bookmark mr-2"></i>Bibliografía</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 min-h-[80vh]">
+
+        <!-- PÁGINA 1: FUNDAMENTOS -->
+        <div id="page-fundamentos" class="page-section active">
+            <!-- Intro Flipped Classroom -->
+            <section class="bg-slate-800 rounded-2xl p-8 border border-slate-700 relative overflow-hidden mb-8">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-600/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                <h2 class="text-3xl font-bold text-white mb-4">Preparación Pre-Sesión: Aula Invertida</h2>
+                <p class="text-lg text-slate-300 max-w-3xl">Bienvenido a la plataforma de trabajo autónomo. El objetivo de este laboratorio virtual es consolidar los conceptos de vías neuroendócrinas, disfunción del tejido adiposo y diagnóstico molecular genómico. El análisis de esta plataforma te preparará para la discusión de nuestro reporte de caso clínico en la sesión presencial de este lunes.</p>
+            </section>
+
+            <div class="border-l-4 border-emerald-500 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-white">1. Integración Neuroendócrina y Diagnóstico Molecular</h2>
+                <p class="text-slate-400 text-sm mt-1">Revisión de mecanismos fisiopatológicos y selección de pruebas genómicas.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Vías Neuroendócrinas -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <h3 class="text-lg font-bold text-emerald-400 mb-4 border-b border-slate-700 pb-2"><i class="fa-solid fa-brain mr-2"></i>Vías de Regulación Hipotalámica</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-arrow-trend-down text-emerald-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-white">Vía Anorexigénica (POMC/CART):</strong> Ante estados de suficiencia energética, niveles elevados de leptina e insulina activan los receptores funcionales de leptina (OB-Rb) en estas neuronas<span class="cita" onclick="navigate('bibliografia')">[1]</span>. La proteína POMC es escindida enzimáticamente por la proproteína convertasa 1 (PCSK1) para generar el péptido estimulante de melanocitos alfa ($\alpha$-MSH)<span class="cita" onclick="navigate('bibliografia')">[1]</span>. La $\alpha$-MSH actúa en el Núcleo Paraventricular (PVN) activando el receptor MC4R, lo que promueve la termogénesis y suprime sostenidamente la ingesta<span class="cita" onclick="navigate('bibliografia')">[1, 2]</span>.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-arrow-trend-up text-red-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-white">Vía Orexigénica (NPY/AgRP):</strong> Activada en ayuno por altos niveles de ghrelina o baja leptina<span class="cita" onclick="navigate('bibliografia')">[1]</span>. El Péptido Relacionado con Agutí (AgRP) actúa como un antagonista competitivo y agonista inverso de los receptores MC4R en el PVN, desplazando a la $\alpha$-MSH y anulando la señalización de saciedad<span class="cita" onclick="navigate('bibliografia')">[1, 2]</span>.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Diagnóstico Molecular -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <h3 class="text-lg font-bold text-emerald-400 mb-4 border-b border-slate-700 pb-2"><i class="fa-solid fa-microscope mr-2"></i>Herramientas de Biología Molecular</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-dna text-emerald-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-white">Paneles NGS y Sanger:</strong> Los Paneles de Secuenciación Masiva en Paralelo son la herramienta de primera línea para el abordaje de la obesidad monogénica y permiten evaluar simultáneamente los genes principales de la vía de la melanocortina ($LEP, LEPR, POMC, PCSK1, MC4R$)<span class="cita" onclick="navigate('bibliografia')">[3]</span>. La secuenciación Sanger está indicada ante la sospecha de una mutación puntual en un gen candidato único<span class="cita" onclick="navigate('bibliografia')">[3]</span>.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-vial text-emerald-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-white">Expresión Génica (RT-qPCR):</strong> Empleada en investigación translacional inmunometabólica para evaluar la expresión relativa de adipocinas y citocinas proinflamatorias en muestras de biopsia de tejido adiposo blanco<span class="cita" onclick="navigate('bibliografia')">[4]</span>. Permite confirmar el fenotipo M1 de los macrófagos tisulares.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-end">
+                <button onclick="navigate('simulador')" class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-2 rounded-lg transition-colors">Siguiente: Laboratorio <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </div>
+
+        <!-- PÁGINA 2: LABORATORIO VIRTUAL -->
+        <div id="page-simulador" class="page-section">
+            <div class="border-l-4 border-emerald-500 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-white">2. Laboratorio Inmunometabólico Interactivo</h2>
+                <p class="text-slate-400 text-sm mt-1">Simulador de señalización intracelular: Modula los parámetros para observar el efecto de la hipoxia, citocinas M1 (TNF-$\alpha$) y FFA sobre el residuo $Ser^{307}$ de IRS-1.</p>
+            </div>
+
+            <div class="bg-slate-800 rounded-xl border border-slate-700 p-6 grid lg:grid-cols-12 gap-8">
+                <!-- Controles -->
+                <div class="lg:col-span-5 space-y-6 bg-slate-900 p-6 rounded-lg border border-slate-800">
+                    <h3 class="text-md font-bold text-white mb-2"><i class="fa-solid fa-sliders text-emerald-400 mr-2"></i>Parámetros Clínico-Genómicos</h3>
+
+                    <div class="space-y-4">
+                        <!-- IMC -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <label class="text-slate-300 font-medium">Índice de Masa Corporal (IMC)</label>
+                                <span id="valImc" class="text-emerald-400 font-bold">22 kg/m²</span>
+                            </div>
+                            <input type="range" id="simImc" min="18.5" max="50" step="0.5" value="22" class="w-full accent-emerald-500 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                            <p class="text-xs text-slate-500 mt-1">Impacta grado de hipertrofia y distancia de difusión de $O_2$.</p>
+                        </div>
+
+                        <!-- Cintura -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <label class="text-slate-300 font-medium">Circunferencia Abdominal (CC)</label>
+                                <span id="valCc" class="text-emerald-400 font-bold">80 cm</span>
+                            </div>
+                            <input type="range" id="simCc" min="60" max="150" step="1" value="80" class="w-full accent-emerald-500 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                            <p class="text-xs text-slate-500 mt-1">Refleja hipertrofia visceral primaria.</p>
+                        </div>
+
+                        <!-- Ácidos Grasos -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <label class="text-slate-300 font-medium">Ácidos Grasos Libres (FFA) Séricos</label>
+                                <span id="valFfa" class="text-emerald-400 font-bold">Normales</span>
+                            </div>
+                            <input type="range" id="simFfa" min="0" max="3" step="1" value="0" class="w-full accent-emerald-500 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                            <p class="text-xs text-slate-500 mt-1">Nivel 0 (Basal) a 3 (Lipotoxicidad por DAG/Ceramidas).</p>
+                        </div>
+
+                        <!-- Carga Genética -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <label class="text-slate-300 font-medium">Escala de Riesgo Poligénico (PRS)</label>
+                                <span id="valPrs" class="text-emerald-400 font-bold">Baja</span>
+                            </div>
+                            <input type="range" id="simPrs" min="1" max="100" step="1" value="10" class="w-full accent-emerald-500 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                            <p class="text-xs text-slate-500 mt-1">Susceptibilidad poligénica subyacente.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfica -->
+                <div class="lg:col-span-7 flex flex-col justify-center">
+                    <h3 class="text-center text-sm font-bold text-white mb-4">Dinámica de Inflamación Tisular (TNF-$\alpha$) e Inactivación de IRS-1 ($Ser^{307}$)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="metabolismChart"></canvas>
+                    </div>
+                    <div class="mt-4 p-4 bg-slate-900 border border-red-900/30 rounded-lg text-xs text-slate-400">
+                        <strong>Correlato Fisiopatológico:</strong> El Factor de Necrosis Tumoral Alfa (TNF-$\alpha$) activa a las cinasas JNK e IKK$\beta$<span class="cita" onclick="navigate('bibliografia')">[4, 5]</span>. Tanto JNK como IKK$\beta$ catalizan la fosforilación aberrante del sustrato 1 del receptor de insulina (IRS-1) en residuos específicos de Serina, predominantemente en $Ser^{307}$<span class="cita" onclick="navigate('bibliografia')">[5]</span>. Esto impide el reclutamiento de PI3K y la translocación de GLUT4<span class="cita" onclick="navigate('bibliografia')">[5]</span>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-between">
+                <button onclick="navigate('fundamentos')" class="text-slate-400 hover:text-white px-4 py-2 transition-colors"><i class="fa-solid fa-arrow-left mr-2"></i> Anterior</button>
+                <button onclick="navigate('casos')" class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-2 rounded-lg transition-colors">Siguiente: Casos Clínicos <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </div>
+
+        <!-- PÁGINA 3: CASOS CLÍNICOS -->
+        <div id="page-casos" class="page-section">
+            <div class="border-l-4 border-emerald-500 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-white">3. Discusión de Casos: Genómica Clínica</h2>
+                <p class="text-slate-400 text-sm mt-1">Interpretación de variantes y perfiles de expresión genética.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Caso A -->
+                <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-emerald-600 transition-colors">
+                    <div class="bg-slate-900 p-4 border-b border-slate-700">
+                        <h3 class="text-white font-bold text-lg"><i class="fa-solid fa-file-waveform text-emerald-400 mr-2"></i>Caso A: Panel Monogénico</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-sm text-slate-300 mb-4"><strong>Fenotipo:</strong> Lactante de 3 años, IMC 38 kg/m². Hiperfagia voraz continua (comportamiento obsesivo de búsqueda de alimento) y aceleración del crecimiento lineal (talla alta). Ausencia de anomalías del desarrollo intelectual.</p>
+
+                        <div class="bg-slate-900 p-3 rounded text-sm font-mono text-emerald-300 mb-4 border border-slate-700">
+                            > RESULTADO TARGETED NGS:<br>
+                            > Gen: MC4R (18q22)<br>
+                            > Variante: c.494G>A (p.Arg165Gln)<br>
+                            > Zigosidad: Heterocigota<br>
+                            > Clasificación ACMG: Patogénica
+                        </div>
+
+                        <h4 class="text-white text-sm font-bold mb-1">Análisis Clínico:</h4>
+                        <p class="text-sm text-slate-400">Mutación en el Receptor 4 de Melanocortina. Constituye la causa monogénica más frecuente de obesidad, representando entre el 2% y el 6% de los casos de obesidad mórbida infantil<span class="cita" onclick="navigate('bibliografia')">[1]</span>. Presenta herencia autosómica dominante con penetrancia incompleta<span class="cita" onclick="navigate('bibliografia')">[2]</span>. Debido a la falta de estímulo en la proteína $G_s$, el paciente es candidato emergente para terapias biológicas dirigidas al restablecimiento de la vía central, aunque Setmelanotida está aprobada primariamente para deficiencias de *POMC*, *PCSK1* o *LEPR*<span class="cita" onclick="navigate('bibliografia')">[6]</span>.</p>
+                    </div>
+                </div>
+
+                <!-- Caso B -->
+                <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-emerald-600 transition-colors">
+                    <div class="bg-slate-900 p-4 border-b border-slate-700">
+                        <h3 class="text-white font-bold text-lg"><i class="fa-solid fa-chart-line text-emerald-400 mr-2"></i>Caso B: Patrón Inmunometabólico</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-sm text-slate-300 mb-4"><strong>Fenotipo:</strong> Adulto 45 años, IMC 39.5 kg/m². Adiposidad abdominal severa (CC: 118 cm). Biopsia de tejido adiposo blanco subcutáneo sometida a extracción de ARN y análisis RT-qPCR.</p>
+
+                        <div class="bg-slate-900 p-3 rounded text-sm font-mono text-emerald-300 mb-4 border border-slate-700">
+                            > RESULTADOS RT-qPCR (Fold Change vs Control Normopeso):<br>
+                            > MCP-1 (CCL2) ARNm: +5.8x<br>
+                            > TNF-$\alpha$ ARNm: +8.2x<br>
+                            > CD11c (Marcador M1): +6.4x<br>
+                            > ADIPOQ (Adiponectina): -4.1x
+                        </div>
+
+                        <h4 class="text-white text-sm font-bold mb-1">Análisis Clínico:</h4>
+                        <p class="text-sm text-slate-400">Evidencia inequívoca de inflamación de bajo grado mediada por macrófagos M1 (activados clásicamente, $CD11c^+$ e $iNOS^+$) reclutados por factor quimiotáctico de monocitos 1 (MCP-1) secretado por adipocitos estresados<span class="cita" onclick="navigate('bibliografia')">[4]</span>. Estos macrófagos M1 se disponen formando Estructuras en Forma de Corona (CLS) y sintetizan el exceso de TNF-$\alpha$ reportado, lo cual inhibe la transcripción del gen *ADIPOQ* (adiponectina)<span class="cita" onclick="navigate('bibliografia')">[4]</span>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-between">
+                <button onclick="navigate('simulador')" class="text-slate-400 hover:text-white px-4 py-2 transition-colors"><i class="fa-solid fa-arrow-left mr-2"></i> Anterior</button>
+                <button onclick="navigate('evaluacion')" class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-2 rounded-lg transition-colors">Siguiente: Evaluación <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </div>
+
+        <!-- PÁGINA 4: AUTOEVALUACIÓN -->
+        <div id="page-evaluacion" class="page-section">
+            <div class="border-l-4 border-emerald-500 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-white">4. Autoevaluación Formativa</h2>
+                <p class="text-slate-400 text-sm mt-1">Completa este cuestionario para habilitar tu asistencia a la sesión presencial de discusión de artículos.</p>
+            </div>
+
+            <form id="quizForm" class="space-y-6">
+
+                <!-- Q1 -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <fieldset>
+                        <legend class="text-white font-semibold mb-3">1. Paciente neonato que desarrolla hipoglicemia severa, ictericia y obesidad rápida con pelo rojo. Los niveles de ACTH están marcadamente disminuidos. ¿Qué genotipo es el más probable?</legend>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q1" value="a" class="accent-emerald-500"> a) Mutación bialélica en <i>LEP</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q1" value="b" class="accent-emerald-500"> b) Mutación nula en <i>POMC</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q1" value="c" class="accent-emerald-500"> c) Mutación en <i>MC4R</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q1" value="d" class="accent-emerald-500"> d) Polimorfismo en <i>CARTPT</i></label>
+                        </div>
+                        <div id="fb-q1" class="hidden mt-4 text-sm p-3 rounded"></div>
+                    </fieldset>
+                </div>
+
+                <!-- Q2 -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <fieldset>
+                        <legend class="text-white font-semibold mb-3">2. A nivel de señalización intracelular, ¿cuál es el mecanismo preciso mediante el cual el TNF-$\alpha$ induce resistencia a la insulina en el músculo esquelético?</legend>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q2" value="a" class="accent-emerald-500"> a) Fosforilación aberrante de IRS-1 en $Ser^{307}$ por vía JNK/IKK$\beta$.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q2" value="b" class="accent-emerald-500"> b) Fosforilación de residuos de Tirosina en el dominio cinasa.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q2" value="c" class="accent-emerald-500"> c) Reducción de la transcripción de SOCS3 hepático.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q2" value="d" class="accent-emerald-500"> d) Bloqueo competitivo de los receptores AdipoR1.</label>
+                        </div>
+                        <div id="fb-q2" class="hidden mt-4 text-sm p-3 rounded"></div>
+                    </fieldset>
+                </div>
+
+                <!-- Q3 -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <fieldset>
+                        <legend class="text-white font-semibold mb-3">3. Ante un fenotipo de obesidad severa infantil sin rasgos sindrómicos ni alteraciones del desarrollo, ¿cuál es la herramienta diagnóstica molecular de primera línea recomendada?</legend>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q3" value="a" class="accent-emerald-500"> a) Array-CGH (Microarreglos).</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q3" value="b" class="accent-emerald-500"> b) Secuenciación completa del Genoma (WGS).</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q3" value="c" class="accent-emerald-500"> c) Cuantificación de expresión génica por RT-qPCR.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q3" value="d" class="accent-emerald-500"> d) Paneles de Secuenciación Masiva en Paralelo (Targeted NGS).</label>
+                        </div>
+                        <div id="fb-q3" class="hidden mt-4 text-sm p-3 rounded"></div>
+                    </fieldset>
+                </div>
+
+                <!-- Q4 -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <fieldset>
+                        <legend class="text-white font-semibold mb-3">4. Fisiológicamente, ¿cuál es la respuesta primaria del Núcleo Arcuato ante la unión de leptina a la isoforma larga de su receptor (OB-Rb)?</legend>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q4" value="a" class="accent-emerald-500"> a) Estimulación de neuronas NPY y liberación de AgRP.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q4" value="b" class="accent-emerald-500"> b) Activación vía JAK2/STAT3 e incremento en transcripción de <i>POMC</i>.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q4" value="c" class="accent-emerald-500"> c) Desfosforilación directa de p38 MAPK.</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q4" value="d" class="accent-emerald-500"> d) Supresión transcripcional del receptor MC4R en el PVN.</label>
+                        </div>
+                        <div id="fb-q4" class="hidden mt-4 text-sm p-3 rounded"></div>
+                    </fieldset>
+                </div>
+
+                <!-- Q5 -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <fieldset>
+                        <legend class="text-white font-semibold mb-3">5. Paciente de 18 meses con obesidad extrema e infecciones bacterianas recurrentes. Pruebas de laboratorio muestran ausencia total de desarrollo puberal e inmunodeficiencia de células T. La mutación afecta con mayor probabilidad al gen:</legend>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q5" value="a" class="accent-emerald-500"> a) <i>LEP</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q5" value="b" class="accent-emerald-500"> b) <i>MC4R</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q5" value="c" class="accent-emerald-500"> c) <i>INSR</i></label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q5" value="d" class="accent-emerald-500"> d) <i>AGRP</i></label>
+                        </div>
+                        <div id="fb-q5" class="hidden mt-4 text-sm p-3 rounded"></div>
+                    </fieldset>
+                </div>
+
+                <!-- Q6 -->
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <fieldset>
+                        <legend class="text-white font-semibold mb-3">6. ¿Qué enzima intracelular se ve funcionalmente bloqueada o carente de activación directa como resultado de la falla de traslocación y reclutamiento desencadenada por la fosforilación en $Ser^{307}$ de IRS-1?</legend>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q6" value="a" class="accent-emerald-500"> a) Glucosa-6-Fosfatasa</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q6" value="b" class="accent-emerald-500"> b) Proteína Cinasa B (Akt/PKB) mediada por PI3K</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q6" value="c" class="accent-emerald-500"> c) AMPK</label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-700 rounded"><input type="radio" name="q6" value="d" class="accent-emerald-500"> d) HSL (Lipasa Sensible a Hormonas)</label>
+                        </div>
+                        <div id="fb-q6" class="hidden mt-4 text-sm p-3 rounded"></div>
+                    </fieldset>
+                </div>
+
+                <div class="flex justify-between items-center pt-4">
+                    <button type="button" onclick="navigate('casos')" class="text-slate-400 hover:text-white px-4 py-2 transition-colors"><i class="fa-solid fa-arrow-left mr-2"></i> Anterior</button>
+                    <button type="button" id="btnEvaluar" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-emerald-900/50 transition-all transform hover:scale-105">
+                        <i class="fa-solid fa-check-double mr-2"></i> Evaluar Respuestas
+                    </button>
+                    <button type="button" onclick="navigate('bibliografia')" class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-2 rounded-lg transition-colors">Siguiente: Bibliografía <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                </div>
+            </form>
+        </div>
+
+        <!-- PÁGINA 5: BIBLIOGRAFÍA -->
+        <div id="page-bibliografia" class="page-section">
+            <div class="border-l-4 border-emerald-500 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-white">5. Referencias Bibliográficas Base</h2>
+                <p class="text-slate-400 text-sm mt-1">Literatura médica y genómica que fundamenta los conceptos del laboratorio virtual.</p>
+            </div>
+
+            <div class="bg-slate-800 rounded-xl p-8 border border-slate-700">
+                <ul class="space-y-6 text-sm text-slate-300">
+                    <li id="ref1" class="flex items-start gap-4 p-4 hover:bg-slate-700/50 rounded-lg transition-colors">
+                        <span class="text-emerald-400 font-bold text-lg">[1]</span>
+                        <div>
+                            <strong class="text-white">Farooqi IS, O'Rahilly S.</strong> (2005). <em>Monogenic obesity in humans.</em> Annual Review of Medicine, 56, 443-458. <br>
+                            <span class="text-slate-500 text-xs">Soporte para: Vías de POMC, leptina, hiperfagia neonatal y deficiencia de MC4R.</span>
+                        </div>
+                    </li>
+                    <li id="ref2" class="flex items-start gap-4 p-4 hover:bg-slate-700/50 rounded-lg transition-colors">
+                        <span class="text-emerald-400 font-bold text-lg">[2]</span>
+                        <div>
+                            <strong class="text-white">Krashes MJ, Lowell BB, Garfield AS.</strong> (2016). <em>Melanocortin-4 receptor-regulated energy homeostasis.</em> Nature Neuroscience, 19(2), 206-219. <br>
+                            <span class="text-slate-500 text-xs">Soporte para: Interacciones competitivas de AgRP y $\alpha$-MSH en el núcleo paraventricular (PVN) y penetrancia incompleta.</span>
+                        </div>
+                    </li>
+                    <li id="ref3" class="flex items-start gap-4 p-4 hover:bg-slate-700/50 rounded-lg transition-colors">
+                        <span class="text-emerald-400 font-bold text-lg">[3]</span>
+                        <div>
+                            <strong class="text-white">Huvenne H, Dubern B, Clement K, Poitou C.</strong> (2016). <em>Rare Genetic Forms of Obesity: Clinical Approach and Current Treatments.</em> Obesity Facts, 9(3), 158-173. <br>
+                            <span class="text-slate-500 text-xs">Soporte para: Uso de Paneles Targeted NGS como herramienta diagnóstica de primera línea.</span>
+                        </div>
+                    </li>
+                    <li id="ref4" class="flex items-start gap-4 p-4 hover:bg-slate-700/50 rounded-lg transition-colors">
+                        <span class="text-emerald-400 font-bold text-lg">[4]</span>
+                        <div>
+                            <strong class="text-white">Hotamisligil GS.</strong> (2017). <em>Inflammation, metaflammation and immunometabolic disorders.</em> Nature, 542(7640), 177-185. <br>
+                            <span class="text-slate-500 text-xs">Soporte para: Macrófagos M1, expresión génica de citocinas (TNF-$\alpha$, MCP-1) y disfunción del tejido adiposo.</span>
+                        </div>
+                    </li>
+                    <li id="ref5" class="flex items-start gap-4 p-4 hover:bg-slate-700/50 rounded-lg transition-colors">
+                        <span class="text-emerald-400 font-bold text-lg">[5]</span>
+                        <div>
+                            <strong class="text-white">Rui L, Aguirre V, Kim JK, Shulman GI, Lee A, Corbould A, Dong LQ, White MF.</strong> (2001). <em>Insulin/IGF-1 and TNF-alpha stimulate phosphorylation of IRS-1 at inhibitory Ser307 via distinct pathways.</em> Journal of Clinical Investigation, 107(2), 181-189. <br>
+                            <span class="text-slate-500 text-xs">Soporte para: Mecanismo molecular de resistencia a la insulina mediado por IKK$\beta$/JNK y fosforilación de $Ser^{307}$.</span>
+                        </div>
+                    </li>
+                    <li id="ref6" class="flex items-start gap-4 p-4 hover:bg-slate-700/50 rounded-lg transition-colors">
+                        <span class="text-emerald-400 font-bold text-lg">[6]</span>
+                        <div>
+                            <strong class="text-white">Clément K, van den Akker E, Argente J, et al.</strong> (2020). <em>Efficacy and safety of setmelanotide, an MC4R agonist, in individuals with severe obesity due to LEPR or POMC deficiency: a single-arm, open-label, multicentre, phase 3 trial.</em> The Lancet Diabetes & Endocrinology, 8(12), 960-970. <br>
+                            <span class="text-slate-500 text-xs">Soporte para: Terapia genómica-dirigida y farmacología clínica de Setmelanotida.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-8 flex justify-start">
+                <button onclick="navigate('evaluacion')" class="text-slate-400 hover:text-white px-4 py-2 transition-colors"><i class="fa-solid fa-arrow-left mr-2"></i> Volver a Evaluación</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Scripts de interactividad y SPA -->
+    <script>
+        /* -------------------------------------------
+           0. Lógica de Navegación (SPA)
+        ------------------------------------------- */
+        function navigate(pageId) {
+            // Ocultar todas las páginas
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Mostrar la página seleccionada
+            document.getElementById('page-' + pageId).classList.add('active');
+
+            // Actualizar estado de los botones de navegación
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            const activeNav = document.getElementById('nav-' + pageId);
+            if(activeNav) activeNav.classList.add('active');
+
+            // Renderizar MathJax si es necesario
+            MathJax.typesetPromise();
+
+            // Subir la vista arriba de manera fluida
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* -------------------------------------------
+               1. Configuración de Chart.js (Simulador)
+            ------------------------------------------- */
+            const ctx = document.getElementById('metabolismChart').getContext('2d');
+
+            const chartData = {
+                labels: ['Nivel de Inflamación (M1/TNF-α) %', 'Bloqueo Insulínico (IRS-1 Ser307) %'],
+                datasets: [{
+                    label: 'Impacto Fisiopatológico',
+                    data: [15, 10],
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.7)', // Red-500
+                        'rgba(16, 185, 129, 0.7)' // Emerald-500
+                    ],
+                    borderColor: [
+                        'rgba(239, 68, 68, 1)',
+                        'rgba(16, 185, 129, 1)'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 4
+                }]
+            };
+
+            const simChart = new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: 'rgba(51, 65, 85, 0.5)' },
+                            ticks: { color: '#94a3b8' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#e2e8f0', font: { weight: 'bold' } }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    animation: {
+                        duration: 300,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+
+            /* -------------------------------------------
+               2. Lógica del Simulador Dinámico
+            ------------------------------------------- */
+            const domElements = {
+                imc: document.getElementById('simImc'),
+                cc: document.getElementById('simCc'),
+                ffa: document.getElementById('simFfa'),
+                prs: document.getElementById('simPrs'),
+                valImc: document.getElementById('valImc'),
+                valCc: document.getElementById('valCc'),
+                valFfa: document.getElementById('valFfa'),
+                valPrs: document.getElementById('valPrs')
+            };
+
+            const ffaLabels = ['Normales', 'Elevados Leves', 'Moderados (DAGs)', 'Lipotoxicidad (Ceramidas)'];
+            const prsLabels = ['Baja', 'Moderada', 'Alta', 'Extrema'];
+
+            function updateSimulator() {
+                const imc = parseFloat(domElements.imc.value);
+                const cc = parseFloat(domElements.cc.value);
+                const ffaIdx = parseInt(domElements.ffa.value);
+                const prs = parseFloat(domElements.prs.value);
+
+                domElements.valImc.textContent = `${imc} kg/m²`;
+                domElements.valCc.textContent = `${cc} cm`;
+                domElements.valFfa.textContent = ffaLabels[ffaIdx];
+
+                let prsTextIdx = Math.floor(prs / 26);
+                prsTextIdx = prsTextIdx > 3 ? 3 : prsTextIdx;
+                domElements.valPrs.textContent = `${prsLabels[prsTextIdx]} (${prs}%)`;
+
+                let inflamacion = ((imc - 18.5) * 2.0) + ((cc - 70) * 0.8) + (ffaIdx * 5) + (prs * 0.15);
+                let resistencia = (inflamacion * 0.6) + ((imc > 25) ? (imc - 25) * 1.5 : 0) + (ffaIdx * 12) + (prs * 0.2);
+
+                inflamacion = Math.max(0, Math.min(100, inflamacion));
+                resistencia = Math.max(0, Math.min(100, resistencia));
+
+                const infColor = inflamacion > 70 ? 'rgba(220, 38, 38, 0.8)' : inflamacion > 40 ? 'rgba(245, 158, 11, 0.8)' : 'rgba(239, 68, 68, 0.6)';
+                const resColor = resistencia > 70 ? 'rgba(220, 38, 38, 0.8)' : resistencia > 40 ? 'rgba(245, 158, 11, 0.8)' : 'rgba(16, 185, 129, 0.6)';
+
+                simChart.data.datasets[0].data = [inflamacion, resistencia];
+                simChart.data.datasets[0].backgroundColor = [infColor, resColor];
+                simChart.update();
+            }
+
+            ['imc', 'cc', 'ffa', 'prs'].forEach(id => {
+                domElements[id].addEventListener('input', updateSimulator);
+            });
+
+            updateSimulator();
+
+            /* -------------------------------------------
+               3. Lógica del Cuestionario de Autoevaluación
+            ------------------------------------------- */
+            const answersMap = {
+                q1: {
+                    correct: 'b',
+                    expl: 'Correcto. Las mutaciones nulas en POMC bloquean la producción de $\\alpha$-MSH e ACTH. La tríada clínica característica incluye obesidad severa hiperfágica, insuficiencia suprarrenal primaria desde la etapa neonatal (causando hipoglicemia) y alteración en la pigmentación (pelo rojo) por ausencia de estímulo sobre receptores MC1R <span class="cita" onclick="navigate(\'bibliografia\')">[1]</span>.'
+                },
+                q2: {
+                    correct: 'a',
+                    expl: 'Exacto. El TNF-$\\alpha$ activa las cinasas JNK y el complejo IKK$\\beta$. Ambas catalizan la fosforilación aberrante del sustrato 1 del receptor de insulina (IRS-1) en residuos específicos de Serina (predominantemente $Ser^{307}$), bloqueando la fosforilación fisiológica en Tirosina <span class="cita" onclick="navigate(\'bibliografia\')">[5]</span>.'
+                },
+                q3: {
+                    correct: 'd',
+                    expl: 'Correcto. Los Paneles de Secuenciación Masiva en Paralelo (Targeted NGS) son la herramienta de primera línea para el abordaje de la obesidad monogénica <span class="cita" onclick="navigate(\'bibliografia\')">[3]</span>. Permiten evaluar simultáneamente múltiples genes predefinidos de la vía de la melanocortina.'
+                },
+                q4: {
+                    correct: 'b',
+                    expl: 'Así es. La leptina se une al receptor OB-Rb en las neuronas POMC/CART del núcleo Arcuato, activando la cascada intracelular JAK2/STAT3, lo que incrementa directamente la transcripción del gen <i>POMC</i> <span class="cita" onclick="navigate(\'bibliografia\')">[1]</span>.'
+                },
+                q5: {
+                    correct: 'a',
+                    expl: 'Excelente. Las mutaciones homocigotas en <i>LEP</i> generan hiperfagia precoz y obesidad severa, acompañadas de hipogonadismo hipogonadotrófico y disfunción de células T (inmunodeficiencia con susceptibilidad a infecciones graves) debido al papel periférico de la leptina en la maduración inmune <span class="cita" onclick="navigate(\'bibliografia\')">[1]</span>.'
+                },
+                q6: {
+                    correct: 'b',
+                    expl: 'Correcto. El bloqueo estérico por fosforilación en $Ser^{307}$ impide el reclutamiento de PI3K. Sin esta activación primaria, la proteína cinasa B (Akt/PKB) no se activa, impidiendo la traslocación de las vesículas que contienen GLUT4 hacia la membrana celular <span class="cita" onclick="navigate(\'bibliografia\')">[5]</span>.'
+                }
+            };
+
+            document.getElementById('btnEvaluar').addEventListener('click', () => {
+                let score = 0;
+
+                Object.keys(answersMap).forEach(qKey => {
+                    const selected = document.querySelector(`input[name="${qKey}"]:checked`);
+                    const fbDiv = document.getElementById(`fb-${qKey}`);
+
+                    if (!selected) {
+                        fbDiv.className = 'mt-4 text-sm p-3 rounded bg-slate-700 text-slate-300 block';
+                        fbDiv.innerHTML = '<i class="fa-solid fa-circle-exclamation text-amber-500 mr-2"></i> Selecciona una respuesta para visualizar la retroalimentación.';
+                        return;
+                    }
+
+                    const isCorrect = selected.value === answersMap[qKey].correct;
+                    if (isCorrect) score++;
+
+                    fbDiv.className = `mt-4 text-sm p-4 rounded border block ${isCorrect ? 'bg-emerald-900/30 border-emerald-500/50 text-emerald-100' : 'bg-red-900/30 border-red-500/50 text-red-100'}`;
+                    fbDiv.innerHTML = `
+                        <div class="font-bold mb-1">${isCorrect ? '<i class="fa-solid fa-check text-emerald-400 mr-2"></i> ¡Respuesta Correcta!' : '<i class="fa-solid fa-xmark text-red-400 mr-2"></i> Respuesta Incorrecta'}</div>
+                        <div>${answersMap[qKey].expl}</div>
+                        ${!isCorrect ? `<div class="mt-2 text-slate-400 text-xs">La respuesta correcta era el inciso: <strong>${answersMap[qKey].correct.toUpperCase()}</strong>. Revisa la Bibliografía para más detalles.</div>` : ''}
+                    `;
+
+                    MathJax.typesetPromise([fbDiv]);
+                });
+
+                if (score === 6) {
+                    alert("¡Excelente trabajo! Has demostrado un dominio absoluto de los conceptos genómicos e inmunometabólicos. Estás listo para el análisis del reporte de caso en la sesión de Aula Invertida.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
